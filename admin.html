@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin | Mouton-Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="admin-body">
+
+    <!-- OVERLAY LOGIN -->
+    <div id="login-section" class="login-container">
+        <div class="login-card">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Accès Admin 🐑</h2>
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Mot de Passe</label>
+                <input type="password" id="admin-pass" placeholder="Entrez votre mot de passe" style="width: 100%; padding: 1rem; border-radius: 12px; border: 1px solid #ddd; outline: none;">
+            </div>
+            <button class="btn-primary" style="width: 100%;" onclick="checkLogin()">Se Connecter</button>
+            <p id="login-error" style="color: var(--accent); margin-top: 1rem; text-align: center; display: none;">Mot de passe incorrect.</p>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD (HIDDEN BY DEFAULT) -->
+    <div id="admin-dashboard" class="admin-layout" style="display:none;">
+        
+        <!-- SIDEBAR -->
+        <aside class="admin-sidebar">
+            <div class="logo">🐑 MOUTON-PRO</div>
+            <ul class="sidebar-nav">
+                <li><a href="#" class="active" onclick="showTab('inventory')">📦 Inventaire</a></li>
+                <li><a href="#" onclick="showTab('orders')">💰 Commandes</a></li>
+                <li><a href="#" onclick="showTab('settings')">⚙️ Paramètres</a></li>
+                <li style="margin-top: 5rem;"><a href="index.html" style="color: #f43f5e">⇠ Quitter</a></li>
+            </ul>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main-content">
+            <div class="admin-header">
+                <h1 id="tab-title">Gestion de l'Inventaire</h1>
+                <button class="btn-primary" onclick="openAddModal()">+ Ajouter un Mouton</button>
+            </div>
+
+            <!-- STATS -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Moutons en Stock</h4>
+                    <div class="value" id="stat-total-sheep">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Commandes Totales</h4>
+                    <div class="value" id="stat-total-orders">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Chiffre d'Affaires</h4>
+                    <div class="value" id="stat-revenue">0 FCFA</div>
+                </div>
+            </div>
+
+            <!-- TABLE CONTAINER -->
+            <div id="inventory-tab" class="admin-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Nom</th>
+                            <th>Prix</th>
+                            <th>Poids</th>
+                            <th>Catégorie</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-sheep-list">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ORDERS TAB (HIDDEN) -->
+            <div id="orders-tab" class="admin-table-container" style="display:none;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Mouton</th>
+                            <th>Client</th>
+                            <th>Montant</th>
+                            <th>Paiement</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-order-list">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- MODAL AJOUT MOUTON -->
+    <div id="add-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeAddModal()">&times;</span>
+            <h2 style="margin-bottom: 2rem;">Gérer le Spécimen</h2>
+            <form id="sheep-form">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div>
+                        <label>Nom</label>
+                        <input type="text" id="sheep-name" required style="width:100%; padding: 0.8rem; border-radius: 8px; border:1px solid #ddd;">
+                    </div>
+                    <div>
+                        <label>Prix (FCFA)</label>
+                        <input type="number" id="sheep-price" required style="width:100%; padding: 0.8rem; border-radius: 8px; border:1px solid #ddd;">
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div>
+                        <label>Poids (kg)</label>
+                        <input type="text" id="sheep-weight" placeholder="Ex: 90kg" style="width:100%; padding: 0.8rem; border-radius: 8px; border:1px solid #ddd;">
+                    </div>
+                    <div>
+                        <label>Catégorie</label>
+                        <select id="sheep-category" style="width:100%; padding: 0.8rem; border-radius: 8px; border:1px solid #ddd;">
+                            <option>Premium</option>
+                            <option>Standard</option>
+                            <option>Éco</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-bottom: 2rem;">
+                    <label>Image URL</label>
+                    <input type="text" id="sheep-image" placeholder="Ex: ladoum.png" style="width:100%; padding: 0.8rem; border-radius: 8px; border:1px solid #ddd;">
+                </div>
+                <button type="submit" class="btn-primary" style="width:100%;">Enregistrer le Mouton</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Administration Navigation
+        function showTab(tab) {
+            document.getElementById('inventory-tab').style.display = tab === 'inventory' ? 'block' : 'none';
+            document.getElementById('orders-tab').style.display = tab === 'orders' ? 'block' : 'none';
+            document.getElementById('tab-title').innerText = tab === 'inventory' ? 'Gestion de l\'Inventaire' : 'Historique des Commandes';
+            
+            // Toggle active link
+            document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function openAddModal() { document.getElementById('add-modal').style.display = 'flex'; }
+        function closeAddModal() { document.getElementById('add-modal').style.display = 'none'; }
+    </script>
+</body>
+</html>

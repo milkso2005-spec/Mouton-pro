@@ -352,11 +352,154 @@ footer {
     color: white;
 }
 
+/* ADMIN DASHBOARD STYLES */
+.admin-body {
+    background: #f0f2f5;
+    min-height: 100vh;
+}
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    width: 280px;
+    background: #111827;
+    color: white;
+    padding: 2rem;
+    position: fixed;
+    height: 100vh;
+}
+
+.sidebar-nav {
+    list-style: none;
+    margin-top: 3rem;
+}
+
+.sidebar-nav li {
+    margin-bottom: 1rem;
+}
+
+.sidebar-nav a {
+    color: #9ca3af;
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    display: block;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.sidebar-nav a.active, .sidebar-nav a:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.main-content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 3rem;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-card h4 {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card .value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.admin-table-container {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 2rem;
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th {
+    text-align: left;
+    padding: 1.2rem 1rem;
+    border-bottom: 2px solid #f3f4f6;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.admin-table td {
+    padding: 1.2rem 1rem;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.action-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 0.85rem;
+}
+
+.btn-edit { background: #dcfce7; color: #166534; }
+.btn-delete { background: #fee2e2; color: #991b1b; margin-left: 0.5rem; }
+
+/* Login Modal */
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #10B981 0%, #111827 100%);
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    padding: 3rem;
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
 /* Mobile */
 @media (max-width: 768px) {
     .nav-links { display: none; }
     .hero h1 { font-size: 2.5rem; }
     .section-padding { padding: 60px 1.5rem; }
+    .admin-sidebar { display: none; }
+    .main-content { margin-left: 0; padding: 1.5rem; }
 }
 
 /* Payment Animation Overlay */
