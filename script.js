@@ -7,8 +7,17 @@ const SUPABASE_URL = "https://jbppivpwbsykzabeqnzi.supabase.co";
 const SUPABASE_KEY = "sb_publishable_MxyDe092Qdu6b1-riK_afw_dg4jPSks";
 const ADMIN_PASSWORD = "admin";
 
-// Initialisation du client Supabase
-const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+// Initialisation différée du client Supabase
+let supabase = null;
+
+function initSupabase() {
+    if (window.supabase) {
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        console.log("Supabase initialisé avec succès !");
+    } else {
+        console.error("Le SDK Supabase n'est pas chargé.");
+    }
+}
 
 let sheepList = [];
 let orderHistory = [];
@@ -217,8 +226,9 @@ function renderSheepGrid() {
 
 // Initialization
 document.addEventListener('DOMContentLoaded', () => {
+    initSupabase();
     fetchSheep();
     if (document.getElementById('admin-dashboard')) {
-        // We are on admin page, but don't show dashboard until login
+        // We are on admin page
     }
 });
