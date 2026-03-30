@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A propos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <div class="logo">🐑 MoutonPro</div>
+    <div class="menu-toggle" id="menu-toggle">☰</div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="about.html">A propos</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="content">
+  <h1>À propos de nous</h1>
+  <p>Nous sommes spécialisés dans l'élevage et la vente de moutons de qualité au Sénégal.</p>
+</section>
+
+<footer>
+  <p>© 2026 MoutonPro</p>
+</footer>
+
+<script>
+document.getElementById('menu-toggle').onclick = () => {
+  document.getElementById('nav-links').classList.toggle('active');
+}
+</script>
+
+</body>
+</html>

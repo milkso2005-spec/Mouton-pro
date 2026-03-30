@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoutonPro | Élevage de Prestige & Vente en Ligne</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Découvrez l'élite des moutons au Sénégal. Ladoum, Touabir, Peul-Peul. Paiement sécurisé Wave et Orange Money.">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">🐑 MOUTON-PRO</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="services.html">Nos Moutons</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="menu-mobile" style="display:none">☰</div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1 class="animate-fade">L'Excellence de l'Élevage, à votre Portée.</h1>
+        <p class="animate-fade" style="animation-delay: 0.2s">Achetez votre mouton en toute sérénité avec Wave et Orange Money.</p>
+        <a href="#sheep-grid" class="btn-primary animate-fade" style="animation-delay: 0.4s">Voir le Catalogue</a>
+    </section>
+
+    <section class="section-padding">
+        <div class="section-title">
+            <h2>Sélection de Prestige</h2>
+            <p>Nos meilleurs spécimens prêts pour le transport.</p>
+        </div>
+        <div id="sheep-grid" class="cards-grid">
+            <!-- Populated by script.js -->
+        </div>
+    </section>
+
+    <section class="section-padding" style="background: white;">
+        <div class="section-title">
+            <h2>Pourquoi Mouton-Pro ?</h2>
+        </div>
+        <div class="cards-grid">
+            <div class="card" style="padding: 2rem; text-align: center; border: none; box-shadow: none;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🚚</div>
+                <h3>Livraison Express</h3>
+                <p>Livré directement chez vous dans les 24h suivant l'achat.</p>
+            </div>
+            <div class="card" style="padding: 2rem; text-align: center; border: none; box-shadow: none;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🛡️</div>
+                <h3>Paiement Sécurisé</h3>
+                <p>Vos transactions Wave et Orange Money sont 100% garanties.</p>
+            </div>
+            <div class="card" style="padding: 2rem; text-align: center; border: none; box-shadow: none;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">⚖️</div>
+                <h3>Poids Certifié</h3>
+                <p>Chaque mouton est pesé devant un huissier avant départ.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">🐑 MOUTON-PRO</div>
+            <p>Dakar, Sénégal - La référence de l'élevage moderne.</p>
+            <ul class="footer-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="services.html">Catalogue</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <p style="opacity: 0.5; font-size: 0.8rem">© 2026 MoutonPro PRO MAX. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL COMMANDE -->
+    <div id="order-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 style="margin-bottom: 1rem;">Finaliser la Commande</h2>
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
+                <h3 id="modal-sheep-name">--</h3>
+                <p id="modal-sheep-price" style="font-weight: 800; color: var(--primary); font-size: 1.5rem;">--</p>
+            </div>
+            
+            <p><strong>Choisissez votre mode de paiement :</strong></p>
+            <div class="payment-options">
+                <div class="payment-btn" onclick="processPayment('Wave')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Wave_Mobile_Money_Logo.png" alt="Wave">
+                    <span>Wave</span>
+                </div>
+                <div class="payment-btn" onclick="processPayment('Orange Money')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Orange-money-logo.png" alt="Orange Money">
+                    <span>Orange Money</span>
+                </div>
+            </div>
+            <p style="font-size: 0.8rem; color: #999; text-align: center;">Transaction sécurisée cryptée de bout en bout.</p>
+        </div>
+    </div>
+
+    <!-- LOADER SIMULATION -->
+    <div id="loader-overlay">
+        <div class="spinner"></div>
+        <p id="loader-text" style="margin-top: 1.5rem; font-weight: 600; color: #555;">Traitement du paiement...</p>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content success-card">
+            <div class="success-icon">✅</div>
+            <h2 style="margin-bottom: 1rem;">Paiement Réussi !</h2>
+            <p>Merci pour votre confiance chez <strong>Mouton-Pro</strong>.</p>
+            <div style="background: #f8f9fa; border: 2px dashed #ddd; padding: 1.5rem; margin: 2rem 0; text-align: left; border-radius: 12px;">
+                <p><strong>Détails du reçu :</strong></p>
+                <p>Article : <span id="success-sheep"></span></p>
+                <p>Montant : <span id="success-amount"></span></p>
+                <p>Mode : <span id="success-method"></span></p>
+                <p>Réf : <span id="success-ref">MP-${Math.floor(Math.random()*1000000)}</span></p>
+            </div>
+            <button class="btn-primary" onclick="closeModal()">Fermer et Retourner à l'Accueil</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

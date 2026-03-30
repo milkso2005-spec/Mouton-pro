@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Moutons | Catalogue Mouton-Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">🐑 MOUTON-PRO</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="services.html">Nos Moutons</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="section-padding" style="margin-top: var(--nav-height);">
+        <div class="section-title animate-fade">
+            <h2>Notre Cheptel d'Exception</h2>
+            <p>Une sélection rigoureuse pour une qualité irréprochable.</p>
+        </div>
+        
+        <div id="sheep-grid" class="cards-grid">
+            <!-- Populated by script.js -->
+        </div>
+    </section>
+
+    <!-- Detailed Profile Template (Handled via script.js for Modals) -->
+    <!-- Same modals as index.html for consistent checkout -->
+    <div id="order-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 style="margin-bottom: 1rem;">Finaliser la Commande</h2>
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
+                <h3 id="modal-sheep-name">--</h3>
+                <p id="modal-sheep-price" style="font-weight: 800; color: var(--primary); font-size: 1.5rem;">--</p>
+            </div>
+            
+            <p><strong>Choisissez votre mode de paiement :</strong></p>
+            <div class="payment-options">
+                <div class="payment-btn" onclick="processPayment('Wave')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Wave_Mobile_Money_Logo.png" alt="Wave">
+                    <span>Wave</span>
+                </div>
+                <div class="payment-btn" onclick="processPayment('Orange Money')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Orange-money-logo.png" alt="Orange Money">
+                    <span>Orange Money</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOADER SIMULATION -->
+    <div id="loader-overlay">
+        <div class="spinner"></div>
+        <p id="loader-text" style="margin-top: 1.5rem; font-weight: 600; color: #555;">Traitement du paiement...</p>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content success-card">
+            <div class="success-icon">✅</div>
+            <h2 style="margin-bottom: 1rem;">Paiement Réussi !</h2>
+            <p>Votre spécimen est désormais réservé.</p>
+            <div style="background: #f8f9fa; border: 2px dashed #ddd; padding: 1.5rem; margin: 2rem 0; text-align: left; border-radius: 12px;">
+                <p><strong>Reçu :</strong></p>
+                <p>Article : <span id="success-sheep"></span></p>
+                <p>Montant : <span id="success-amount"></span></p>
+            </div>
+            <button class="btn-primary" onclick="closeModal()">Fermer</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">🐑 MOUTON-PRO</div>
+            <p>© 2026 MoutonPro PRO MAX. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
